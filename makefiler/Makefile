@@ -6,7 +6,7 @@ RM = del
 BIN = datetest.exe calendartest.exe myapp.exe
 else
 RM = rm
-BIN = datetest, calendartest, myapp
+BIN = datetest calendartest myapp
 endif
 
 %.o: %.c
@@ -38,5 +38,5 @@ clean:
 	$(RM) $(OBJ) $(BIN)
 
 runtest: datetest calendartest
-	datetest
-	calendartest
+	./datetest
+	./calendartest
