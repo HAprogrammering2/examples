@@ -1,5 +1,7 @@
-# This project's binary
-blinker
+# This project's binaries
+datetest
+calendartest
+myapp
 
 # Prerequisites
 *.d
