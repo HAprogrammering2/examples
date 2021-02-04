@@ -1,0 +1,11 @@
+-- Definiera alias för make --
+I admin Power Shell, ändra körningsprincipen till RemoteSinged, som tillåter
+lokala skript att köras:
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
+
+Ta reda på vilken profil som körs i din powershell:
+echo $profile
+
+I den filen (i mitt fall C:\Users\jeane\OneDrive\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1):
+lägg till alias t.ex. för make:
+New-Item -Path Alias:make -Value mingw32-make
