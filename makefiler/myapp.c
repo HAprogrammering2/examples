@@ -57,26 +57,24 @@ int read_number_to_delete(int max){
 }
 
 date read_date(){
-    date new_date;
+    date new_d;
+    int day, month, year;
     printf ("Please enter a date in format dd.mm.yyyy: ");
 
-    while (scanf("%d.%d.%d", &new_date.day, &new_date.month, &new_date.year) != 3){
+    while (scanf("%d.%d.%d", &day, &month, &year) != 3){
         printf("Please enter a date in format dd.mm.yyyy: ");
         clear_buffer();
     }
     clear_buffer();
-    return new_date;
+    new_d = new_date(day, month, year);
+    return new_d;
 }
 
-char * read_message(){
-    char buffer[21];
-    char * str;
-    printf("Please enter a label for the event, no more than 20 characters: ");
-    fgets(buffer, 21, stdin);
+void read_message(char * buffer){
+    printf("Please enter a label for the event, no more than %d characters: ", EVENT_NAME_LENGTH);
+    fgets(buffer, EVENT_NAME_LENGTH, stdin);
 
-    buffer[20]= '\0';
-    str = (char *)malloc(21*sizeof(char));
-    strncpy(str, buffer, 21);
+    buffer[EVENT_NAME_LENGTH - 1]= '\0';
 
     // Replace newline alternative 1: search and replace
 //    char * newlinechr = NULL;
@@ -89,22 +87,21 @@ char * read_message(){
 //    }
 
     // Replace newline alternative 2: set end of string to NULL
-    int last_pos = strnlen(str, 21) - 1;
-    if (str[last_pos] == '\n'){
-        str[last_pos] = '\0';
+    int last_pos = strnlen(buffer, EVENT_NAME_LENGTH) - 1;
+    if (buffer[last_pos] == '\n'){
+        buffer[last_pos] = '\0';
     }
     else{
         clear_buffer();
     }
 
-    return str;
 }
 
 int main(){
     bool done = false;
     calendar mycal;
     date date;
-    char * event = NULL;
+    char event[EVENT_NAME_LENGTH] = "\0";
     mycal = new_calendar();
     int maxelement = 0;
 
@@ -113,8 +110,8 @@ int main(){
         switch(read_selection()){
             case 1:
                 date = read_date();
-                event = read_message();     
-                printf("Adding %s on date %d.%d.%d\n", event, date.day, date.month, date.year);
+                read_message(event);     
+                printf("Adding %s on date ", event); print_date(date); printf("\n");
                 mycal = insert_entry (mycal, date, event);
                 break;
             case 2:
