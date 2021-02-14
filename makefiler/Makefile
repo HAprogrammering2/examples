@@ -1,8 +1,20 @@
 CFLAGS = -Wall -pedantic
 OBJS = myapp.o calendar.o date.o
 TESTOBJS = datetest.o calendartest.o
+
+# ----------------------
+# OS dependent makros
+# ----------------------
+ifeq ($(OS), Windows_NT)
+RM = del
+BINS = myapp.exe
+TESTBINS = datetest.exe calendartest.exe
+else
+RM = rm -rf
 BINS = myapp
 TESTBINS = datetest calendartest
+endif
+
 
 all: $(BINS) $(TESTBINS)
 
@@ -39,7 +51,7 @@ datetest: datetest.o date.o
 calendartest: calendartest.o calendar.o date.o
 	gcc $(CFLAGS) date.o calendar.o calendartest.o -o calendartest
 
-runtest: datetest calendartest
+runtest: $(TESTBINS)
 	./datetest
 	./calendartest
 
