@@ -1,6 +1,7 @@
 #include "calendar.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 calendar new_calendar(){
     return NULL;
@@ -45,7 +46,7 @@ calendar insert_entry (calendar calendar, date date, char * event){
 
     new_entry = (calendar_entry *)malloc(sizeof(calendar_entry));
     new_entry->date = date;
-    new_entry->event = event;
+    strcpy(new_entry->event, event);
 
     previous_entry = NULL;
     current_entry = calendar;
@@ -84,14 +85,12 @@ calendar calendar_delete_nth(calendar calendar, int n){
         if (current != NULL){
             if (previous != NULL){
                 previous->next = current->next;
-                free(current->event);
                 free(current);
                 current = previous->next;
             }
             else {
                 // Deleting first element
                 calendar = calendar->next;
-                free(current->event);
                 free(current);
                 current = calendar;
             }

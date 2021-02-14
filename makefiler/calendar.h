@@ -1,10 +1,11 @@
 #ifndef CALENDARH
 #define CALENDARH
 #include "date.h"
+#define EVENT_NAME_LENGTH 80
 
 struct calendar_entry_struct {
     date date;
-    char * event;
+    char event[EVENT_NAME_LENGTH];
     struct calendar_entry_struct * next;
 };
 
