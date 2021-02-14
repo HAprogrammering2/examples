@@ -1,42 +1,50 @@
-OBJ = date.o calendar.o 
 CFLAGS = -Wall -pedantic
+OBJS = myapp.o calendar.o date.o
+TESTOBJS = datetest.o calendartest.o
+BINS = myapp
+TESTBINS = datetest calendartest
 
-ifeq ($(OS), Windows_NT)
-RM = del
-BIN = datetest.exe calendartest.exe myapp.exe
-else
-RM = rm
-BIN = datetest calendartest myapp
-endif
+all: $(BINS) $(TESTBINS)
 
-%.o: %.c
-	gcc $(CFLAGS) -o $@ -c $< 
+clean:
+	rm -rf $(OBJS) $(TESTOBJS) $(BINS) $(TESTBINS)
 
-#calendar.o: calendar.c 
-#	gcc $(CFLAGS) -c calendar.c -o calendar.o
-#
-#date.o: date.c
-#	gcc $(CFLAGS) -c date.c -o date.o
+# ----------------------
+# Rules for the app
+# ----------------------
+myapp.o: myapp.c calendar.h date.h
+	gcc $(CFLAGS) -c myapp.c 
 
-datetest: datetest.c date.o
-	gcc $(CFLAGS) datetest.c date.o -o datetest
+calendar.o: calendar.c calendar.h date.h
+	gcc $(CFLAGS) -c calendar.c 
 
-calendartest: calendar.o date.o calendartest.c 
-	gcc $(CFLAGS) calendartest.c calendar.o date.o -o calendartest
+date.o: date.c date.h
+	gcc $(CFLAGS) -c date.c 
 
-#myapp.o: myapp.c calendar.o date.o
-#	gcc $(CFLAGS) -c myapp.c -o myapp.o
-
-myapp: myapp.o date.o calendar.o
+myapp: myapp.o calendar.o date.o
 	gcc $(CFLAGS) myapp.o calendar.o date.o -o myapp
 
-all: datetest calendartest myapp 
+# ----------------------
+# Rules for unit testing
+# ----------------------
+datetest.o: datetest.c date.h
+	gcc $(CFLAGS) -c datetest.c
 
-test:
-	echo $(OS)
-clean:
-	$(RM) $(OBJ) $(BIN)
+calendartest.o: calendartest.c calendar.h date.h
+	gcc $(CFLAGS) -c calendartest.c
+
+datetest: datetest.o date.o
+	gcc $(CFLAGS) date.o datetest.o -o datetest
+
+calendartest: calendartest.o calendar.o date.o
+	gcc $(CFLAGS) date.o calendar.o calendartest.o -o calendartest
 
 runtest: datetest calendartest
 	./datetest
 	./calendartest
+
+# ----------------------------
+# Implicit rule for future use
+# ----------------------------
+%.o: %.c
+	gcc $(CFLAGS) -c $< -o $@
