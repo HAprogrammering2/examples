@@ -5,8 +5,14 @@
 int main (){
     date date1, date2;
     
-    date1 = new_date(25, 10, 2021);
-    date2 = new_date(26, 10, 2021);
+    date1 = new_date(25, 1, 2021);
+    date2 = new_date(26, 1, 2021);    
+
+    TEST_CASE("Printing dates")
+    print_date(date1);
+    printf(" should be 25.1.2021\n");
+    print_date(date2);
+    printf(" should be 26.1.2021\n");
 
     TEST_CASE("Comparing 1")
     VERIFY(date_is_before(date1, date2), "Date1 before date2")
