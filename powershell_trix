@@ -9,3 +9,5 @@ echo $profile
 I den filen (i mitt fall C:\Users\jeane\OneDrive\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1):
 lägg till alias t.ex. för make:
 New-Item -Path Alias:make -Value mingw32-make
+
+get-command är which i PowerShell
