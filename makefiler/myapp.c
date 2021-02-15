@@ -112,7 +112,10 @@ int main(){
                 date = read_date();
                 read_message(event);     
                 printf("Adding %s on date ", event); print_date(date); printf("\n");
+                DEBUG_ADDR("mycal before insert: ", mycal);
                 mycal = insert_entry (mycal, date, event);
+                DEBUG_ADDR("mycal after insert: ", mycal);
+
                 break;
             case 2:
                 print_calendar(mycal);

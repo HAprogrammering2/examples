@@ -1,4 +1,5 @@
 #include "calendar.h"
+#include "debug.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -44,12 +45,16 @@ calendar insert_entry (calendar calendar, date date, char * event){
     calendar_entry * previous_entry;
     calendar_entry * new_entry;
 
+    DEBUG_ADDR("calendar in beginning of insert", calendar);
     new_entry = (calendar_entry *)malloc(sizeof(calendar_entry));
+    DEBUG_ADDR("address to new entry", new_entry);
+
     new_entry->date = date;
     strcpy(new_entry->event, event);
 
     previous_entry = NULL;
     current_entry = calendar;
+
 
     // Find the place to insert the new node
     while (current_entry != NULL && date_is_before(current_entry->date, date)){

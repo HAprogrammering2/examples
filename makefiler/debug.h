@@ -3,9 +3,12 @@
 
 #define DEBUGON
 #ifdef DEBUGON
-#define DEBUG(msg) printf("DEBUG: %s\n", msg)
+#define DEBUG(msg) fprintf(stderr, "DEBUG: %s\n", msg)
+#define DEBUG_ADDR(msg, ptr) printf("DEBUG: %s %p\n", msg, (void *)ptr)
 #else
 #define DEBUG(msg)
+#define DEBUG_ADDR(msg, ptr)
 #endif // DEBUGON
 
 #endif // DEBUGH
+
