@@ -11,3 +11,10 @@ lägg till alias t.ex. för make:
 New-Item -Path Alias:make -Value mingw32-make
 
 get-command är which i PowerShell
+
+Redirect av stdin  < filename  fås i PowerShell med
+get-content filename |  
+
+Sätta PowerShells encoding till UTF8 
+$OutputEncoding = [console]::InputEncoding = [console]::OutputEncoding =
+                    New-Object System.Text.UTF8Encoding
