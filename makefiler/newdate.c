@@ -1,4 +1,4 @@
-#include "date.h"
+#include "newdate.h"
 #include "time.h"
 #include <stdio.h>
 
@@ -22,11 +22,9 @@ date new_date(int day, int month, int year){
 }
 
 
-bool date_is_before(date beginning, date end){
-    double seconds;
-    
-    seconds = difftime(end, beginning);
-    return (seconds > 0);
+bool date_is_before(date first, date second){
+    return (first < second);
+
 }
 
 void print_date(date date){

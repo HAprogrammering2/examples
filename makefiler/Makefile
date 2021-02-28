@@ -16,10 +16,10 @@ TESTBINS = datetest calendartest
 endif
 
 
-all: $(BINS) $(TESTBINS)
+all: myapp datetest calendartest
 
 clean:
-	rm -rf $(OBJS) $(TESTOBJS) $(BINS) $(TESTBINS)
+	$(RM) $(OBJS) $(TESTOBJS) $(BINS) $(TESTBINS)
 
 # ----------------------
 # Rules for the app
