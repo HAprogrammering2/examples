@@ -1,5 +1,10 @@
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "cert-err34-c"
+/**
+ * @file read_exempel.c
+ * @brief Example of reading file in c. Some of these examples depend on the 
+ * write_exempel.c file having been compiled and run first. 
+ * This file is intended to be compiled and run. You can compare the output 
+ * with the file content to learn about how the functions work.
+ */
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -8,7 +13,10 @@
 #define BINFILENAME "writetest.bin"
 #define BUFFER_SIZE 80
 
-
+/**
+ * @brief Help function, prints heading for examples
+ * @param str Heading to print.
+ */
 void print_example_heading(const char * str){
     printf("\n%s\n", str);
     for (int i = 0; i < strlen(str); i++) {
@@ -16,13 +24,17 @@ void print_example_heading(const char * str){
     }
     printf("\n");
 }
+
+
 int main(){
     FILE * fileptr;
     int day, month, year, a_char, i, chars_read, elements_read;
     char buffer[BUFFER_SIZE];
     char * line_read;
 
-    // Setup, making sure we have data to read in the file
+    /* ------------------------------------------------------------------------- */
+    /* Setup, making sure we have data to read in the file                       */
+    /* ------------------------------------------------------------------------- */
     fileptr = fopen(FILENAME, "w");
     if (fileptr != NULL) {
         fprintf(fileptr, "12.2.2021\n");
@@ -32,23 +44,32 @@ int main(){
 
     fileptr = fopen(FILENAME, "r");
     if (fileptr == NULL) {
-        return EXIT_FAILURE;
+        printf("Kunde inte öppna filen %s för läsning.", FILENAME);
+        exit(EXIT_FAILURE);
     }
 
-    // Example of fscanf
+    /* ------------------------------------------------------------------------- */
+    /* Exempel: fscanf                                                           */
+    /* ------------------------------------------------------------------------- */    
     print_example_heading("Exempel på inläsning med scanf");
     int count = fscanf(fileptr, "%d.%d.%d ", &day, &month, &year);
-    printf("Read the following values from file: day:%d, month:%d, year: %d\n", day, month, year);
+    printf("Read the following %d values from file: day:%d, month:%d, year:%d\n", count, day, month, year);
 
-    // Example of fgetc
+    /* ------------------------------------------------------------------------- */
+    /* Exempel: fgetc: kompakt version                                           */
+    /* ------------------------------------------------------------------------- */    
     print_example_heading("Exempel på inläsning med fgetc");
     while ((a_char = fgetc(fileptr)) != EOF){
         printf("%c ", a_char);
     }
 
-    // Reached end of file, rewinding so we can read more
+    // Reached end of file, rewinding to the beginning of the second line so we can read more
     fseek(fileptr, 10, SEEK_SET);
 
+
+    /* ------------------------------------------------------------------------- */
+    /* Exempel: fgetc: längre version                                            */
+    /* ------------------------------------------------------------------------- */    
     print_example_heading("Exempel på inläsning med fgetc, använder returvärdet");
     a_char = fgetc(fileptr);
     while (a_char != EOF){
@@ -56,21 +77,25 @@ int main(){
         a_char = fgetc(fileptr);
     }
 
-    // Reached end of file, rewinding so we can read more
+    // Reached end of file, rewinding to the beginning of the file we can read more
     rewind(fileptr);
 
-    // Example of fgets
+    /* ------------------------------------------------------------------------- */
+    /* Exempel: fgets: kompakt version                                           */
+    /* ------------------------------------------------------------------------- */    
     print_example_heading("Exempel på inläsning med fgets");
     i = 1;
-    while (fgets(buffer, BUFFER_SIZE, fileptr) != NULL){
+    while (fgets(buffer, 80, fileptr) != NULL){
         printf("Rad %d: %s", i, buffer);
         i++;
     }
 
-    // Reached end of file, rewinding so we can read more
+    // Reached end of file, rewinding to the beginning of the file we can read more
     rewind(fileptr);
 
-    // Same example as before, but catching the return value in char *
+    /* ------------------------------------------------------------------------- */
+    /* Exempel: fgets: längre version                                            */
+    /* ------------------------------------------------------------------------- */    
     print_example_heading("Exempel på inläsning med fgetc, använder returvärdet");
     line_read = fgets(buffer, BUFFER_SIZE, fileptr);
     i = 1;
@@ -80,11 +105,12 @@ int main(){
         i++;
     }
 
-
-    // Reached end of file, rewinding so we can read more
+    // Reached end of file, rewinding rewinding to the beginning of the second line so we can read more
     fseek(fileptr, 10, SEEK_SET);
 
-    // Example of fread
+    /* ------------------------------------------------------------------------- */
+    /* Exempel: fread: textfil                                                   */
+    /* ------------------------------------------------------------------------- */    
     print_example_heading("Exempel på inläsning med fread");
     chars_read = fread(buffer, sizeof(char), 80, fileptr);
     if (chars_read != EOF) {
@@ -94,11 +120,14 @@ int main(){
 
     fclose(fileptr);
 
-    // Reading binary file
+    /* ------------------------------------------------------------------------- */
+    /* Exempel: fread: binärfil                                                  */
+    /* ------------------------------------------------------------------------- */    
     print_example_heading("Exempel på binär inläsning med fread");
     fileptr = fopen(BINFILENAME, "rb");
     if (fileptr == NULL) {
-        return EXIT_FAILURE;
+        printf("Kunde inte öppna filen %s. Kompilera och kör write_exempel.c och försök på nytt.", BINFILENAME);
+        exit(EXIT_FAILURE);
     }
     int read_array [5];
     elements_read = fread(read_array, sizeof(int), 5, fileptr);
@@ -108,4 +137,3 @@ int main(){
     }
 
 }
-#pragma clang diagnostic pop
