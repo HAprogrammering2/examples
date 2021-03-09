@@ -1,4 +1,4 @@
-#include <stdio.h>
+ #include <stdio.h>
 #include <string.h>
 
 int main(){
@@ -7,8 +7,8 @@ int main(){
 
     char * abc = "abc";
     char * skander = "åäö";
-    printf("Längden på strängen %s är %lu\n", abc, strlen(abc));
-    printf("Längden på strängen %s är %lu\n", skander, strlen(skander));
+    printf("Längden på strängen %s är %u\n", abc, strlen(abc));
+    printf("Längden på strängen %s är %u\n", skander, strlen(skander));
     
     // Olika sätt att initiera en sträng
     char * hello_const = "Hello world (1)";
