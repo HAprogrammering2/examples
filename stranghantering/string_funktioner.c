@@ -16,11 +16,11 @@ int main (){
     char hello[] = "Hello world!\n";
     char goodbye[] = "Goodbye cruel world.";
 
-    printf("hello is %lu chars long.\n", strlen(hello));
-    printf("goodbye is %lu chars long.\n", strlen(goodbye));
+    printf("hello is %u chars long.\n", strlen(hello));
+    printf("goodbye is %u chars long.\n", strlen(goodbye));
 
     char * world = hello + 6;
-    printf("world is %lu chars long.\n", strlen(world));
+    printf("world is %u chars long.\n", strlen(world));
 
     // ---------------------------------------------------------
     // Konkatenering av strängar
@@ -47,7 +47,7 @@ int main (){
     char * an_o = strrchr(hello, 'o');
     printf("Hittade sista O:et på \'%s\'\n", an_o);
 
-    printf("Sista O:et finns i hello[%ld]\n", an_o - hello);
+    printf("Sista O:et finns i hello[%d]\n", an_o - hello);
 
     // ---------------------------------------------------------
     // Tokenisering av en sträng. 
