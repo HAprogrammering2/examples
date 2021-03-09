@@ -16,5 +16,4 @@ Redirect av stdin  < filename  fås i PowerShell med
 get-content filename |  
 
 Sätta PowerShells encoding till UTF8 
-$OutputEncoding = [console]::InputEncoding = [console]::OutputEncoding =
-                    New-Object System.Text.UTF8Encoding
+$OutputEncoding = [console]::InputEncoding = [console]::OutputEncoding = New-Object System.Text.UTF8Encoding
