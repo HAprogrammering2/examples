@@ -1,0 +1,43 @@
+The addresses of day and selection:
+&day: 0x16d84784c
+&selection: 0x16d84784b
+
+The values of the pointer variables:
+dayptr: 0x16d84784c
+sptr: 0x16d84784b
+
+What the pointers point to:
+*dayptr: 3
+*sptr: q
+
+The value of the pointer variable:
+ptrptr: 0x16d847840
+
+What the pointer points to:
+*ptrptr: 0x16d84784c
+
+What the pointer pointed to the by the pointer points to:
+**ptrptr: 3
+
+The values of the fields of the struct are:
+jeanette.age: 25
+jeanette.name: Jeanette
+jeanette.programmer: 1
+
+The values of the fields of the struct are:
+jptr->age: 25
+jptr->name: Jeanette
+jptr->programmer: 1
+
+Compare with access using (*jptr).field:
+(*jptr).age: 25
+(*jptr).name: Jeanette
+(*jptr).programmer: 1
+
+Compare accessing fourth element of the array and the pointer.
+sessions[3]: 8
+arrptr1[3]: 8
+
+Compare accessing fourth element of the array and the pointer.
+sessions[3]: 8
+arrptr2[3]: 8
